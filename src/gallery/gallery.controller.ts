@@ -29,6 +29,7 @@ export class GalleryController {
     private readonly cloudinaryService: CloudinaryService,
   ) {}
 
+  //get images with pagination
   @Get('pagination')
   @ApiResponse({
     status: 201,
@@ -52,6 +53,7 @@ export class GalleryController {
     return this.galleryService.findAllWithPagination(+page, +limit);
   }
 
+  //create image
   @Post()
   @ApiBody({ type: CreateGalleryDto })
   @ApiResponse({ status: 201, description: 'create gallery', type: Gallery })
@@ -63,6 +65,7 @@ export class GalleryController {
     return this.galleryService.create(createGalleryDto);
   }
 
+  //get all images
   @Get()
   @ApiResponse({ status: 201, description: 'get all images', type: [Gallery] })
   @ApiResponse({
@@ -78,6 +81,7 @@ export class GalleryController {
     return this.galleryService.findAll();
   }
 
+  //get image by ID
   @Get(':id')
   @ApiResponse({ status: 201, description: 'get  image by id', type: Gallery })
   @ApiResponse({
@@ -93,6 +97,7 @@ export class GalleryController {
     return this.galleryService.findOne(+id);
   }
 
+  //delete image
   @Delete(':id')
   @ApiResponse({ status: 201, description: 'delete image' })
   @ApiResponse({
@@ -108,6 +113,7 @@ export class GalleryController {
     return this.galleryService.remove(+id);
   }
 
+  //upload image to Cloudinary
   @Post('upload')
   @ApiResponse({
     status: 201,

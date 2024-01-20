@@ -21,6 +21,7 @@ import { NotFoundResponse } from '../types';
 export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
+  //get reviews with pagination
   @Get('pagination')
   @ApiResponse({
     status: 201,
@@ -44,6 +45,7 @@ export class ReviewsController {
     return this.reviewsService.findAllWithPagination(+page, +limit);
   }
 
+  //create review
   @Post()
   @ApiBody({ type: CreateReviewDto })
   @ApiResponse({ status: 201, description: 'create review', type: Review })
@@ -55,6 +57,7 @@ export class ReviewsController {
     return this.reviewsService.create(createReviewDto);
   }
 
+  //get all reviews
   @Get()
   @ApiResponse({ status: 201, description: 'get all reviews', type: [Review] })
   @ApiResponse({
@@ -70,10 +73,11 @@ export class ReviewsController {
     return this.reviewsService.findAll();
   }
 
+  //get review by ID
   @Get(':id')
   @ApiResponse({
     status: 201,
-    description: 'get single excursion',
+    description: 'get single review',
     type: Review,
   })
   @ApiResponse({
@@ -89,6 +93,7 @@ export class ReviewsController {
     return this.reviewsService.findOne(+id);
   }
 
+  //update review
   @Patch(':id')
   @ApiBody({ type: UpdateReviewDto })
   @ApiResponse({ status: 201, description: 'update review', type: Review })
@@ -105,6 +110,7 @@ export class ReviewsController {
     return this.reviewsService.update(+id, updateReviewDto);
   }
 
+  //delete review
   @Delete(':id')
   @ApiResponse({ status: 201, description: 'delete review' })
   @ApiResponse({
