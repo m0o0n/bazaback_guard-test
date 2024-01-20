@@ -11,6 +11,7 @@ import { ForgotPasswordDto } from './dto/forgot-password.dto';
 export class PasswordController {
   constructor(private readonly passwordService: PasswordService) {}
 
+  //password recovery send email
   @Post('forgot')
   @ApiBody({ type: ForgotPasswordDto })
   @ApiResponse({
@@ -21,6 +22,7 @@ export class PasswordController {
     return this.passwordService.sendMail(email);
   }
 
+  //reset password
   @Post('reset')
   @ApiBody({ type: ResetPasswordDto })
   @ApiResponse({ status: 201, description: 'reset password', type: IUser })
@@ -37,6 +39,7 @@ export class PasswordController {
     return this.passwordService.resetPassword(resetPasswordDto);
   }
 
+  //change password
   @Post('change')
   @ApiBody({ type: ChangePasswordDto })
   @ApiResponse({ status: 201, description: 'change password', type: IUser })

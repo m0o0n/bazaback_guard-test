@@ -6,14 +6,16 @@ import { get } from 'http';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   app.setGlobalPrefix('api/v1');
+
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('Cows Shelter example')
-    .setDescription('The cows shelter API description')
+    .setTitle('Baza Skill API example')
+    .setDescription('Baza Skill API description')
     .setVersion('1.0')
-    .addTag('cows')
+    .addTag('BazaSkill')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
