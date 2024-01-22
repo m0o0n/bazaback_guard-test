@@ -465,7 +465,7 @@ window.onload = function() {
           ],
           "responses": {
             "201": {
-              "description": "get single excursion",
+              "description": "get single review",
               "content": {
                 "application/json": {
                   "schema": {
@@ -692,14 +692,14 @@ window.onload = function() {
       }
     },
     "info": {
-      "title": "Cows Shelter example",
-      "description": "The cows shelter API description",
+      "title": "Baza Skill API example",
+      "description": "Baza Skill API description",
       "version": "1.0",
       "contact": {}
     },
     "tags": [
       {
-        "name": "cows",
+        "name": "BazaSkill",
         "description": ""
       }
     ],

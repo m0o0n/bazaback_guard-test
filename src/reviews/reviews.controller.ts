@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
@@ -15,6 +16,7 @@ import { UpdateReviewDto } from './dto/update-review.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Review } from './entities/review.entity';
 import { NotFoundResponse } from '../types';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Reviews')
 @Controller('reviews')
@@ -53,6 +55,7 @@ export class ReviewsController {
     status: 500,
     description: 'internal server error',
   })
+  @UseGuards(JwtAuthGuard)
   create(@Body() createReviewDto: CreateReviewDto) {
     return this.reviewsService.create(createReviewDto);
   }
@@ -106,6 +109,7 @@ export class ReviewsController {
     status: 500,
     description: 'internal server error',
   })
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
     return this.reviewsService.update(+id, updateReviewDto);
   }
@@ -122,6 +126,7 @@ export class ReviewsController {
     status: 500,
     description: 'internal server error',
   })
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.reviewsService.remove(+id);
   }
