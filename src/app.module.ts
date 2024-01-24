@@ -8,12 +8,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
-import { ReviewsModule } from './reviews/reviews.module';
 import { PasswordModule } from './password/password.module';
 import { MailingModule } from './mailing/mailing.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { TestimonialsModule } from './testimonials/testimonials.module';
 
 @Module({
   imports: [
@@ -50,10 +50,10 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     UserModule,
     AuthModule,
     GalleryModule,
-    ReviewsModule,
     PasswordModule,
     MailingModule,
     CloudinaryModule,
+    TestimonialsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

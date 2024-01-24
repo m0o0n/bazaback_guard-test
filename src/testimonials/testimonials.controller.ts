@@ -10,25 +10,25 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ReviewsService } from './reviews.service';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { UpdateReviewDto } from './dto/update-review.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Review } from './entities/review.entity';
 import { NotFoundResponse } from '../types';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Testimonial } from './entities/testimonial.entity';
+import { TestimonialsService } from './testimonials.service';
+import { CreateTestimonialDto } from './dto/create-testimonial.dto';
+import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 
-@ApiTags('Reviews')
-@Controller('reviews')
-export class ReviewsController {
-  constructor(private readonly reviewsService: ReviewsService) {}
+@ApiTags('Testimonials')
+@Controller('testimonials')
+export class TestimonialsController {
+  constructor(private readonly testimonialsService: TestimonialsService) {}
 
-  //get reviews with pagination
+  //get testimonials with pagination
   @Get('pagination')
   @ApiResponse({
     status: 201,
     description: 'get all images',
-    type: [Review],
+    type: [Testimonial],
   })
   @ApiResponse({
     status: 404,
@@ -44,25 +44,33 @@ export class ReviewsController {
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 2,
   ) {
-    return this.reviewsService.findAllWithPagination(+page, +limit);
+    return this.testimonialsService.findAllWithPagination(+page, +limit);
   }
 
-  //create review
+  //create testimonial
   @Post()
-  @ApiBody({ type: CreateReviewDto })
-  @ApiResponse({ status: 201, description: 'create review', type: Review })
+  @ApiBody({ type: CreateTestimonialDto })
+  @ApiResponse({
+    status: 201,
+    description: 'create testimonial',
+    type: Testimonial,
+  })
   @ApiResponse({
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
-  create(@Body() createReviewDto: CreateReviewDto) {
-    return this.reviewsService.create(createReviewDto);
+  // @UseGuards(JwtAuthGuard)
+  create(@Body() createTestimonialDto: CreateTestimonialDto) {
+    return this.testimonialsService.create(createTestimonialDto);
   }
 
-  //get all reviews
+  //get all testimonials
   @Get()
-  @ApiResponse({ status: 201, description: 'get all reviews', type: [Review] })
+  @ApiResponse({
+    status: 201,
+    description: 'get all testimonials',
+    type: [Testimonial],
+  })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -73,15 +81,15 @@ export class ReviewsController {
     description: 'internal server error',
   })
   findAll() {
-    return this.reviewsService.findAll();
+    return this.testimonialsService.findAll();
   }
 
-  //get review by ID
+  //get testimonial by ID
   @Get(':id')
   @ApiResponse({
     status: 201,
-    description: 'get single review',
-    type: Review,
+    description: 'get single testimonial',
+    type: Testimonial,
   })
   @ApiResponse({
     status: 404,
@@ -93,13 +101,17 @@ export class ReviewsController {
     description: 'internal server error',
   })
   findOne(@Param('id') id: string) {
-    return this.reviewsService.findOne(+id);
+    return this.testimonialsService.findOne(+id);
   }
 
-  //update review
+  //update testimonial
   @Patch(':id')
-  @ApiBody({ type: UpdateReviewDto })
-  @ApiResponse({ status: 201, description: 'update review', type: Review })
+  @ApiBody({ type: UpdateTestimonialDto })
+  @ApiResponse({
+    status: 201,
+    description: 'update testimonial',
+    type: Testimonial,
+  })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -110,13 +122,16 @@ export class ReviewsController {
     description: 'internal server error',
   })
   @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
-    return this.reviewsService.update(+id, updateReviewDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateTestimonialDto: UpdateTestimonialDto,
+  ) {
+    return this.testimonialsService.update(+id, updateTestimonialDto);
   }
 
-  //delete review
+  //delete testimonial
   @Delete(':id')
-  @ApiResponse({ status: 201, description: 'delete review' })
+  @ApiResponse({ status: 201, description: 'delete testimonial' })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -128,6 +143,6 @@ export class ReviewsController {
   })
   @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
-    return this.reviewsService.remove(+id);
+    return this.testimonialsService.remove(+id);
   }
 }

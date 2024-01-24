@@ -327,257 +327,6 @@ window.onload = function() {
           ]
         }
       },
-      "/api/v1/reviews/pagination": {
-        "get": {
-          "operationId": "ReviewsController_findAllWithPagination",
-          "parameters": [
-            {
-              "name": "page",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            },
-            {
-              "name": "limit",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "get all images",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Review"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        }
-      },
-      "/api/v1/reviews": {
-        "post": {
-          "operationId": "ReviewsController_create",
-          "parameters": [],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateReviewDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "create review",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Review"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        },
-        "get": {
-          "operationId": "ReviewsController_findAll",
-          "parameters": [],
-          "responses": {
-            "201": {
-              "description": "get all reviews",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Review"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        }
-      },
-      "/api/v1/reviews/{id}": {
-        "get": {
-          "operationId": "ReviewsController_findOne",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "get single review",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Review"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        },
-        "patch": {
-          "operationId": "ReviewsController_update",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateReviewDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "update review",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Review"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        },
-        "delete": {
-          "operationId": "ReviewsController_remove",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "delete review"
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Reviews"
-          ]
-        }
-      },
       "/api/v1/password/forgot": {
         "post": {
           "operationId": "PasswordController_forgotPassword",
@@ -687,6 +436,257 @@ window.onload = function() {
           },
           "tags": [
             "Password"
+          ]
+        }
+      },
+      "/api/v1/testimonials/pagination": {
+        "get": {
+          "operationId": "TestimonialsController_findAllWithPagination",
+          "parameters": [
+            {
+              "name": "page",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "limit",
+              "required": true,
+              "in": "query",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "get all images",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Testimonial"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
+          ]
+        }
+      },
+      "/api/v1/testimonials": {
+        "post": {
+          "operationId": "TestimonialsController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTestimonialDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "create testimonial",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Testimonial"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
+          ]
+        },
+        "get": {
+          "operationId": "TestimonialsController_findAll",
+          "parameters": [],
+          "responses": {
+            "201": {
+              "description": "get all testimonials",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Testimonial"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
+          ]
+        }
+      },
+      "/api/v1/testimonials/{id}": {
+        "get": {
+          "operationId": "TestimonialsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "get single testimonial",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Testimonial"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
+          ]
+        },
+        "patch": {
+          "operationId": "TestimonialsController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTestimonialDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "update testimonial",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Testimonial"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
+          ]
+        },
+        "delete": {
+          "operationId": "TestimonialsController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "delete testimonial"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Testimonials"
           ]
         }
       }
@@ -799,60 +799,6 @@ window.onload = function() {
             "imageUrl"
           ]
         },
-        "Review": {
-          "type": "object",
-          "properties": {
-            "name_ua": {
-              "type": "string",
-              "description": "Reviewer`s name in ukrainian"
-            },
-            "name_en": {
-              "type": "string",
-              "description": "Reviewer`s name in english"
-            },
-            "review_ua": {
-              "type": "string",
-              "description": "Review text  in ukrainian"
-            },
-            "review_en": {
-              "type": "string",
-              "description": "Review text in english"
-            }
-          },
-          "required": [
-            "name_ua",
-            "name_en",
-            "review_ua",
-            "review_en"
-          ]
-        },
-        "CreateReviewDto": {
-          "type": "object",
-          "properties": {
-            "name_ua": {
-              "type": "string"
-            },
-            "name_en": {
-              "type": "string"
-            },
-            "review_ua": {
-              "type": "string"
-            },
-            "review_en": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name_ua",
-            "name_en",
-            "review_ua",
-            "review_en"
-          ]
-        },
-        "UpdateReviewDto": {
-          "type": "object",
-          "properties": {}
-        },
         "ForgotPasswordDto": {
           "type": "object",
           "properties": {
@@ -893,6 +839,49 @@ window.onload = function() {
             "email",
             "password"
           ]
+        },
+        "Testimonial": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Reviewer`s name"
+            },
+            "review": {
+              "type": "string",
+              "description": "Review text"
+            }
+          },
+          "required": [
+            "name",
+            "review"
+          ]
+        },
+        "CreateTestimonialDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "review": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "review"
+          ]
+        },
+        "UpdateTestimonialDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "review": {
+              "type": "string"
+            }
+          }
         }
       }
     }
