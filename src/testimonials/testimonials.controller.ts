@@ -59,7 +59,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   create(@Body() createTestimonialDto: CreateTestimonialDto) {
     return this.testimonialsService.create(createTestimonialDto);
   }
