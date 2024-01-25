@@ -9,6 +9,7 @@ import {
   Query,
   Req,
   UseGuards,
+  HttpCode,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { NotFoundResponse } from '../types';
@@ -49,6 +50,7 @@ export class TestimonialsController {
 
   //create testimonial
   @Post()
+  @HttpCode(201)
   @ApiBody({ type: CreateTestimonialDto })
   @ApiResponse({
     status: 201,
