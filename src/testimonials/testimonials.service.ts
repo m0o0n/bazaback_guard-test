@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTestimonialDto } from './dto/create-testimonial.dto';
 import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 import { Testimonial } from './entities/testimonial.entity';
@@ -13,53 +18,69 @@ export class TestimonialsService {
   ) {}
 
   async create(createTestimonialDto: CreateTestimonialDto) {
-    return await this.testimonialsRepository.save(createTestimonialDto);
+    await this.testimonialsRepository.save(createTestimonialDto);
   }
 
   async findAll() {
-    return this.testimonialsRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-    });
+    try {
+      const testimonials = await this.testimonialsRepository.find({
+        order: {
+          createdAt: 'DESC',
+        },
+      });
+      return testimonials;
+    } catch (error) {
+      throw new HttpException(
+        'Server Error:',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async findOne(id: number) {
-    const post = await this.testimonialsRepository.findOne({
-      where: { id },
-    });
-    if (!post) throw new NotFoundException('This excursion not found');
-    return post;
+    try {
+      const post = await this.testimonialsRepository.findOne({
+        where: { id },
+      });
+      if (!post) throw new NotFoundException('This testimonial not found');
+      return post;
+    } catch (error) {
+      throw new HttpException(
+        'Server Error:',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
-    const review = await this.testimonialsRepository.findOne({
-      where: { id },
-    });
-    if (!review) throw new NotFoundException('This review not found');
-    await this.testimonialsRepository.update(id, updateTestimonialDto);
-    return { success: true };
+    try {
+      const review = await this.testimonialsRepository.findOne({
+        where: { id },
+      });
+      if (!review) throw new NotFoundException('This review not found');
+      await this.testimonialsRepository.update(id, updateTestimonialDto);
+      return { success: true };
+    } catch (error) {
+      throw new HttpException(
+        'Server Error:',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   async remove(id: number) {
-    const review = await this.testimonialsRepository.findOne({
-      where: { id },
-    });
-    if (!review) throw new NotFoundException('This review not found');
-    await this.testimonialsRepository.delete(id);
-    return { success: true };
-  }
-
-  async findAllWithPagination(page: number, limit: number) {
-    const allReviews = await this.findAll();
-    const totalLength = allReviews.length;
-    const reviews = await this.testimonialsRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-      take: limit,
-      skip: (page - 1) * limit,
-    });
-    return { reviews, totalLength };
+    try {
+      const review = await this.testimonialsRepository.findOne({
+        where: { id },
+      });
+      if (!review) throw new NotFoundException('This review not found');
+      await this.testimonialsRepository.delete(id);
+      return { success: true };
+    } catch (error) {
+      throw new HttpException(
+        'Server Error:',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 }

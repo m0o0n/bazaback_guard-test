@@ -6,9 +6,8 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
-  Req,
   UseGuards,
+  HttpCode,
 } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { NotFoundResponse } from '../types';
@@ -23,32 +22,9 @@ import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 export class TestimonialsController {
   constructor(private readonly testimonialsService: TestimonialsService) {}
 
-  //get testimonials with pagination
-  @Get('pagination')
-  @ApiResponse({
-    status: 201,
-    description: 'get all images',
-    type: [Testimonial],
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  findAllWithPagination(
-    @Req() req,
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 2,
-  ) {
-    return this.testimonialsService.findAllWithPagination(+page, +limit);
-  }
-
   //create testimonial
   @Post()
+  @HttpCode(201)
   @ApiBody({ type: CreateTestimonialDto })
   @ApiResponse({
     status: 201,
@@ -59,7 +35,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   create(@Body() createTestimonialDto: CreateTestimonialDto) {
     return this.testimonialsService.create(createTestimonialDto);
   }
@@ -67,7 +43,7 @@ export class TestimonialsController {
   //get all testimonials
   @Get()
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'get all testimonials',
     type: [Testimonial],
   })
