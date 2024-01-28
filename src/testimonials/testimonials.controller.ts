@@ -6,8 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
-  Req,
   UseGuards,
   HttpCode,
 } from '@nestjs/common';
@@ -23,30 +21,6 @@ import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
 @Controller('testimonials')
 export class TestimonialsController {
   constructor(private readonly testimonialsService: TestimonialsService) {}
-
-  //get testimonials with pagination
-  @Get('pagination')
-  @ApiResponse({
-    status: 201,
-    description: 'get all images',
-    type: [Testimonial],
-  })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
-  })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
-  findAllWithPagination(
-    @Req() req,
-    @Query('page') page: number = 1,
-    @Query('limit') limit: number = 2,
-  ) {
-    return this.testimonialsService.findAllWithPagination(+page, +limit);
-  }
 
   //create testimonial
   @Post()
@@ -69,7 +43,7 @@ export class TestimonialsController {
   //get all testimonials
   @Get()
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'get all testimonials',
     type: [Testimonial],
   })

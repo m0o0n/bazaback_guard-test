@@ -439,60 +439,6 @@ window.onload = function() {
           ]
         }
       },
-      "/api/v1/testimonials/pagination": {
-        "get": {
-          "operationId": "TestimonialsController_findAllWithPagination",
-          "parameters": [
-            {
-              "name": "page",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            },
-            {
-              "name": "limit",
-              "required": true,
-              "in": "query",
-              "schema": {
-                "type": "number"
-              }
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "get all images",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Testimonial"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
-            }
-          },
-          "tags": [
-            "Testimonials"
-          ]
-        }
-      },
       "/api/v1/testimonials": {
         "post": {
           "operationId": "TestimonialsController_create",
@@ -530,7 +476,7 @@ window.onload = function() {
           "operationId": "TestimonialsController_findAll",
           "parameters": [],
           "responses": {
-            "201": {
+            "200": {
               "description": "get all testimonials",
               "content": {
                 "application/json": {
@@ -840,6 +786,21 @@ window.onload = function() {
             "password"
           ]
         },
+        "CreateTestimonialDto": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "review": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "review"
+          ]
+        },
         "Testimonial": {
           "type": "object",
           "properties": {
@@ -850,21 +811,6 @@ window.onload = function() {
             "review": {
               "type": "string",
               "description": "Review text"
-            }
-          },
-          "required": [
-            "name",
-            "review"
-          ]
-        },
-        "CreateTestimonialDto": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "review": {
-              "type": "string"
             }
           },
           "required": [
