@@ -15,6 +15,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
 import { PartnersModule } from './partners/partners.module';
+import { CountersModule } from './counters/counters.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { PartnersModule } from './partners/partners.module';
     CloudinaryModule,
     TestimonialsModule,
     PartnersModule,
+    CountersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

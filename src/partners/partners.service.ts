@@ -9,32 +9,48 @@ import { Repository } from 'typeorm';
 export class PartnersService {
   constructor(
     @InjectRepository(Partner)
-    private readonly partnersRepository: Repository<Partner>
-  ){}
-  create(public_cloudinary_id: string, image_url: string, createPartnerDto: CreatePartnerDto) {
-    return this.partnersRepository.save({...createPartnerDto, image_url, public_cloudinary_id});
+    private readonly partnersRepository: Repository<Partner>,
+  ) {}
+  create(
+    public_cloudinary_id: string,
+    image_url: string,
+    createPartnerDto: CreatePartnerDto,
+  ) {
+    return this.partnersRepository.save({
+      ...createPartnerDto,
+      image_url,
+      public_cloudinary_id,
+    });
   }
 
   findAll() {
-    return  this.partnersRepository.find();
+    return this.partnersRepository.find();
   }
 
   findOne(id: number) {
     return this.partnersRepository.findOne({
-      where: {id}
+      where: { id },
     });
   }
 
-  async update(id: number, updatePartnerDto: UpdatePartnerDto, public_cloudinary_id?: string, image_url?:string) {
+  async update(
+    id: number,
+    updatePartnerDto: UpdatePartnerDto,
+    public_cloudinary_id?: string,
+    image_url?: string,
+  ) {
     const partner = await this.partnersRepository.findOne({
       where: { id },
     });
     if (!partner) throw new NotFoundException('This partner not found');
-    if(public_cloudinary_id){
-     return await this.partnersRepository.update(id, {...updatePartnerDto, public_cloudinary_id, image_url})
-    } 
-    return await this.partnersRepository.update(id, updatePartnerDto)
-   
+    if (public_cloudinary_id) {
+      return await this.partnersRepository.update(id, {
+        ...updatePartnerDto,
+        public_cloudinary_id,
+        image_url,
+      });
+    }
+    return await this.partnersRepository.update(id, updatePartnerDto);
   }
 
   async remove(id: number) {
@@ -43,6 +59,6 @@ export class PartnersService {
     });
     if (!partner) throw new NotFoundException('This partner not found');
     await this.partnersRepository.delete(id);
-    return {message: "partner successefuly deleted", partner}
+    return { message: 'partner successefuly deleted', partner };
   }
 }
