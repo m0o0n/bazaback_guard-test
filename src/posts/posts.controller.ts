@@ -132,7 +132,7 @@ export class PostsController {
         title: { type: 'string' },
         content: { type: 'string' },
       },
-      required: ['file'],
+      required: ['title', 'content'],
     },
   })
   @ApiResponse({
