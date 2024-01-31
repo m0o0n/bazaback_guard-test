@@ -16,6 +16,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { TestimonialsModule } from './testimonials/testimonials.module';
 import { PartnersModule } from './partners/partners.module';
 import { CountersModule } from './counters/counters.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { CountersModule } from './counters/counters.module';
     TestimonialsModule,
     PartnersModule,
     CountersModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

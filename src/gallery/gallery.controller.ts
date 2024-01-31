@@ -58,7 +58,7 @@ export class GalleryController {
   //create image
   @Post()
   @ApiBody({ type: CreateGalleryDto })
-  @ApiResponse({ status: 201, description: 'create gallery', type: Gallery })
+  @ApiResponse({ status: 201, description: 'created', type: Gallery })
   @ApiResponse({
     status: 500,
     description: 'internal server error',
@@ -70,7 +70,7 @@ export class GalleryController {
 
   //get all images
   @Get()
-  @ApiResponse({ status: 201, description: 'get all images', type: [Gallery] })
+  @ApiResponse({ status: 200, description: 'get all images', type: [Gallery] })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -86,7 +86,7 @@ export class GalleryController {
 
   //get image by ID
   @Get(':id')
-  @ApiResponse({ status: 201, description: 'get  image by id', type: Gallery })
+  @ApiResponse({ status: 200, description: 'get  image by id', type: Gallery })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -102,7 +102,7 @@ export class GalleryController {
 
   //delete image
   @Delete(':id')
-  @ApiResponse({ status: 201, description: 'delete image' })
+  @ApiResponse({ status: 200, description: 'delete image' })
   @ApiResponse({
     status: 404,
     description: 'not found',
@@ -120,7 +120,7 @@ export class GalleryController {
   //upload image to Cloudinary
   @Post('upload')
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'upload image',
     type: UploadImageResponse,
   })

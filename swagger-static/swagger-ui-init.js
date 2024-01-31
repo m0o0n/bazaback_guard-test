@@ -173,7 +173,7 @@ window.onload = function() {
           },
           "responses": {
             "201": {
-              "description": "create gallery",
+              "description": "created",
               "content": {
                 "application/json": {
                   "schema": {
@@ -194,7 +194,7 @@ window.onload = function() {
           "operationId": "GalleryController_findAll",
           "parameters": [],
           "responses": {
-            "201": {
+            "200": {
               "description": "get all images",
               "content": {
                 "application/json": {
@@ -240,7 +240,7 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "201": {
+            "200": {
               "description": "get  image by id",
               "content": {
                 "application/json": {
@@ -281,7 +281,7 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "201": {
+            "200": {
               "description": "delete image"
             },
             "404": {
@@ -308,7 +308,7 @@ window.onload = function() {
           "operationId": "GalleryController_uploadFile",
           "parameters": [],
           "responses": {
-            "201": {
+            "200": {
               "description": "upload image",
               "content": {
                 "application/json": {
@@ -522,7 +522,7 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "201": {
+            "200": {
               "description": "get single testimonial",
               "content": {
                 "application/json": {
@@ -614,7 +614,7 @@ window.onload = function() {
             }
           ],
           "responses": {
-            "201": {
+            "200": {
               "description": "delete testimonial"
             },
             "404": {
@@ -654,7 +654,10 @@ window.onload = function() {
             "201": {
               "description": ""
             }
-          }
+          },
+          "tags": [
+            "Partners"
+          ]
         },
         "get": {
           "operationId": "PartnersController_findAll",
@@ -663,7 +666,10 @@ window.onload = function() {
             "200": {
               "description": ""
             }
-          }
+          },
+          "tags": [
+            "Partners"
+          ]
         }
       },
       "/api/v1/partners/{id}": {
@@ -683,7 +689,10 @@ window.onload = function() {
             "200": {
               "description": ""
             }
-          }
+          },
+          "tags": [
+            "Partners"
+          ]
         },
         "patch": {
           "operationId": "PartnersController_update",
@@ -711,7 +720,10 @@ window.onload = function() {
             "200": {
               "description": ""
             }
-          }
+          },
+          "tags": [
+            "Partners"
+          ]
         },
         "delete": {
           "operationId": "PartnersController_remove",
@@ -729,7 +741,10 @@ window.onload = function() {
             "200": {
               "description": ""
             }
-          }
+          },
+          "tags": [
+            "Partners"
+          ]
         }
       },
       "/api/v1/counters": {
@@ -922,6 +937,203 @@ window.onload = function() {
           },
           "tags": [
             "Counters"
+          ]
+        }
+      },
+      "/api/v1/posts": {
+        "post": {
+          "operationId": "PostsController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePostDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Posts"
+          ]
+        },
+        "get": {
+          "operationId": "PostsController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "get all testimonials",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Posts"
+          ]
+        }
+      },
+      "/api/v1/posts/{id}": {
+        "get": {
+          "operationId": "PostsController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get post by id",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Posts"
+          ]
+        },
+        "patch": {
+          "operationId": "PostsController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePostDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "update post",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Posts"
+          ]
+        },
+        "delete": {
+          "operationId": "PostsController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "delete post"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Posts"
           ]
         }
       }
@@ -1161,6 +1373,46 @@ window.onload = function() {
             "technologies",
             "libraries"
           ]
+        },
+        "CreatePostDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "content",
+            "image_url",
+            "image_id"
+          ]
+        },
+        "UpdatePostDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "image_id": {
+              "type": "string"
+            }
+          }
         }
       }
     }

@@ -39,11 +39,12 @@ export class TestimonialsService {
 
   async findOne(id: number) {
     try {
-      const post = await this.testimonialsRepository.findOne({
+      const testimonial = await this.testimonialsRepository.findOne({
         where: { id },
       });
-      if (!post) throw new NotFoundException('This testimonial not found');
-      return post;
+      if (!testimonial)
+        throw new NotFoundException('This testimonial not found');
+      return testimonial;
     } catch (error) {
       throw new HttpException(
         'Server Error:',
@@ -54,10 +55,10 @@ export class TestimonialsService {
 
   async update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
     try {
-      const review = await this.testimonialsRepository.findOne({
+      const testimonial = await this.testimonialsRepository.findOne({
         where: { id },
       });
-      if (!review) throw new NotFoundException('This review not found');
+      if (!testimonial) throw new NotFoundException('This review not found');
       await this.testimonialsRepository.update(id, updateTestimonialDto);
       return { success: true };
     } catch (error) {
@@ -70,10 +71,10 @@ export class TestimonialsService {
 
   async remove(id: number) {
     try {
-      const review = await this.testimonialsRepository.findOne({
+      const testimonial = await this.testimonialsRepository.findOne({
         where: { id },
       });
-      if (!review) throw new NotFoundException('This review not found');
+      if (!testimonial) throw new NotFoundException('This review not found');
       await this.testimonialsRepository.delete(id);
       return { success: true };
     } catch (error) {
