@@ -6,17 +6,26 @@ import {
   Patch,
   Param,
   Delete,
-  HttpCode,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBody,
+  ApiConsumes,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { NotFoundResponse } from 'src/types';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { PostEntity } from './entities/post.entity';
 // import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @ApiTags('Posts')
@@ -29,12 +38,28 @@ export class PostsController {
 
   //create post
   @Post()
-  @HttpCode(201)
-  @ApiBody({ type: CreatePostDto })
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Create a Post' })
+  @ApiBody({
+    description: 'Upload a file',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+        title: { type: 'string' },
+        content: { type: 'string' },
+      },
+      required: ['file', 'title', 'content'],
+    },
+  })
   @ApiResponse({
     status: 201,
     description: 'created',
-    type: Post,
+    type: PostEntity,
   })
   @ApiResponse({
     status: 500,
@@ -56,10 +81,11 @@ export class PostsController {
 
   //get all posts
   @Get()
+  @ApiOperation({ summary: 'Get posts' })
   @ApiResponse({
     status: 200,
     description: 'get all testimonials',
-    type: [Post],
+    type: [PostEntity],
   })
   @ApiResponse({
     status: 404,
@@ -76,31 +102,43 @@ export class PostsController {
 
   //get post by ID
   @Get(':id')
-  @ApiResponse({
-    status: 200,
-    description: 'get post by id',
-    type: Post,
+  @ApiOperation({ summary: 'Get post by id' })
+  @ApiOkResponse({
+    type: PostEntity,
+    isArray: false,
   })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
+  @ApiNotFoundResponse({
+    description: 'Not Found',
   })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
-  })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
   findOne(@Param('id') id: string) {
     return this.postsService.findOne(+id);
   }
 
   //update post
   @Patch(':id')
-  @ApiBody({ type: UpdatePostDto })
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Update post' })
+  @ApiBody({
+    description: 'Upload a file',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+        title: { type: 'string' },
+        content: { type: 'string' },
+      },
+      required: [],
+    },
+  })
   @ApiResponse({
     status: 201,
     description: 'update post',
-    type: Post,
+    type: PostEntity,
   })
   @ApiResponse({
     status: 404,
@@ -118,7 +156,7 @@ export class PostsController {
     @Body() updatePostDto: UpdatePostDto,
     @UploadedFile() file?: Express.Multer.File,
   ) {
-    if (file) {
+    if (file && file[0].size > 0) {
       const { image_id } = await this.postsService.findOne(id);
       await this.cloudinaryService.deleteFile(image_id);
       const { public_id, url } = await this.cloudinaryService.uploadFile(
@@ -132,15 +170,11 @@ export class PostsController {
 
   //delete post
   @Delete(':id')
-  @ApiResponse({ status: 200, description: 'delete post' })
-  @ApiResponse({
-    status: 404,
-    description: 'not found',
-    type: NotFoundResponse,
+  @ApiOkResponse({
+    description: 'Deleted Successfully',
   })
-  @ApiResponse({
-    status: 500,
-    description: 'internal server error',
+  @ApiNotFoundResponse({
+    description: 'Not Found',
   })
   //  @UseGuards(JwtAuthGuard)
   async remove(@Param('id') id: string) {
