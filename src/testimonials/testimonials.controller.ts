@@ -63,7 +63,7 @@ export class TestimonialsController {
   //get testimonial by ID
   @Get(':id')
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'get single testimonial',
     type: Testimonial,
   })
@@ -107,7 +107,7 @@ export class TestimonialsController {
 
   //delete testimonial
   @Delete(':id')
-  @ApiResponse({ status: 201, description: 'delete testimonial' })
+  @ApiResponse({ status: 200, description: 'delete testimonial' })
   @ApiResponse({
     status: 404,
     description: 'not found',

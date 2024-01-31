@@ -14,25 +14,27 @@ import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Partners')
 @Controller('partners')
 export class PartnersController {
   constructor(
     private readonly partnersService: PartnersService,
-    private readonly CloudinaryService: CloudinaryService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @UploadedFile() file: Express.Multer.File,
-    @Body() CreatePartnerDto: CreatePartnerDto,
+    @Body() createPartnerDto: CreatePartnerDto,
   ) {
-    const { public_id, url } = await this.CloudinaryService.uploadFile(
+    const { public_id, url } = await this.cloudinaryService.uploadFile(
       file,
       'baza_skill',
     );
-    const res = this.partnersService.create(public_id, url, CreatePartnerDto);
+    const res = this.partnersService.create(public_id, url, createPartnerDto);
     return res;
   }
 
@@ -55,8 +57,8 @@ export class PartnersController {
   ) {
     if (file) {
       const { public_cloudinary_id } = await this.partnersService.findOne(id);
-      await this.CloudinaryService.deleteFile(public_cloudinary_id);
-      const { public_id, url } = await this.CloudinaryService.uploadFile(
+      await this.cloudinaryService.deleteFile(public_cloudinary_id);
+      const { public_id, url } = await this.cloudinaryService.uploadFile(
         file,
         'baza_skill',
       );
@@ -68,7 +70,7 @@ export class PartnersController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     const res = await this.partnersService.remove(+id);
-    await this.CloudinaryService.deleteFile(res.partner.public_cloudinary_id);
+    await this.cloudinaryService.deleteFile(res.partner.public_cloudinary_id);
     return res;
   }
 }
