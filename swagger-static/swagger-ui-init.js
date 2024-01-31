@@ -731,6 +731,199 @@ window.onload = function() {
             }
           }
         }
+      },
+      "/api/v1/counters": {
+        "post": {
+          "operationId": "CountersController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCounterDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "create testimonial",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Counter"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Counters"
+          ]
+        },
+        "get": {
+          "operationId": "CountersController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "get all counters",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Counter"
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Counters"
+          ]
+        }
+      },
+      "/api/v1/counters/{id}": {
+        "get": {
+          "operationId": "CountersController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "get single counter",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Counter"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "counter not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Counters"
+          ]
+        },
+        "patch": {
+          "operationId": "CountersController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTestimonialDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "update counters",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Counter"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Counters"
+          ]
+        },
+        "delete": {
+          "operationId": "CountersController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "delete counter"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
+            }
+          },
+          "tags": [
+            "Counters"
+          ]
+        }
       }
     },
     "info": {
@@ -932,6 +1125,42 @@ window.onload = function() {
         "UpdatePartnerDto": {
           "type": "object",
           "properties": {}
+        },
+        "CreateCounterDto": {
+          "type": "object",
+          "properties": {}
+        },
+        "Counter": {
+          "type": "object",
+          "properties": {
+            "liveProject": {
+              "type": "number",
+              "description": "counter of live projects"
+            },
+            "members": {
+              "type": "number",
+              "description": "counter of members"
+            },
+            "employed": {
+              "type": "number",
+              "description": "counter of empoyed members"
+            },
+            "technologies": {
+              "type": "number",
+              "description": "counter of technologies"
+            },
+            "libraries": {
+              "type": "number",
+              "description": "counter of used libraries"
+            }
+          },
+          "required": [
+            "liveProject",
+            "members",
+            "employed",
+            "technologies",
+            "libraries"
+          ]
         }
       }
     }
