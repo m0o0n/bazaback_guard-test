@@ -132,7 +132,7 @@ export class PostsController {
         title: { type: 'string' },
         content: { type: 'string' },
       },
-      required: [],
+      required: ['file'],
     },
   })
   @ApiResponse({
@@ -156,7 +156,7 @@ export class PostsController {
     @Body() updatePostDto: UpdatePostDto,
     @UploadedFile() file?: Express.Multer.File,
   ) {
-    if (file && file[0].size > 0) {
+    if (file) {
       const { image_id } = await this.postsService.findOne(id);
       await this.cloudinaryService.deleteFile(image_id);
       const { public_id, url } = await this.cloudinaryService.uploadFile(
