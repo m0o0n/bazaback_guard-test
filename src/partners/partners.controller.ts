@@ -14,7 +14,7 @@ import { PartnersService } from './partners.service';
 import { CreatePartnerDto } from './dto/create-partner.dto';
 import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Partners')
 @Controller('partners')
@@ -25,6 +25,24 @@ export class PartnersController {
   ) {}
 
   @Post()
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Create a Partner' })
+  @ApiBody({
+    description: 'Upload a file',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+        name: { type: 'string' },
+        partner_url: { type: 'string' },
+      },
+      required: ['file', 'name', 'partner_url'],  
+    },
+  })
   @UseInterceptors(FileInterceptor('file'))
   async create(
     @UploadedFile() file: Express.Multer.File,
@@ -49,6 +67,24 @@ export class PartnersController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({ summary: 'Update a Partner' })
+  @ApiBody({
+    description: 'Upload a file',
+    type: 'multipart/form-data',
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+        name: { type: 'string' },
+        partner_url: { type: 'string' },
+      },
+      required: ['name', 'partner_url'],  
+    },
+  })
   @UseInterceptors(FileInterceptor('file'))
   async update(
     @Param('id') id: number,

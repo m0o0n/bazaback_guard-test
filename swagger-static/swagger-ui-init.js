@@ -639,13 +639,33 @@ window.onload = function() {
       "/api/v1/partners": {
         "post": {
           "operationId": "PartnersController_create",
+          "summary": "Create a Partner",
           "parameters": [],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePartnerDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "partner_url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file",
+                    "name",
+                    "partner_url"
+                  ],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
@@ -696,6 +716,7 @@ window.onload = function() {
         },
         "patch": {
           "operationId": "PartnersController_update",
+          "summary": "Update a Partner",
           "parameters": [
             {
               "name": "id",
@@ -708,10 +729,28 @@ window.onload = function() {
           ],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdatePartnerDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "partner_url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "partner_url"
+                  ],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
@@ -1350,14 +1389,6 @@ window.onload = function() {
               "type": "string"
             }
           }
-        },
-        "CreatePartnerDto": {
-          "type": "object",
-          "properties": {}
-        },
-        "UpdatePartnerDto": {
-          "type": "object",
-          "properties": {}
         },
         "CreateCounterDto": {
           "type": "object",
