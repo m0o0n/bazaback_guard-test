@@ -1137,7 +1137,10 @@ window.onload = function() {
                       "type": "string"
                     }
                   },
-                  "required": [],
+                  "required": [
+                    "title",
+                    "content"
+                  ],
                   "$ref": "#/components/schemas/"
                 }
               }
