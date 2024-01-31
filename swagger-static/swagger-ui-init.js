@@ -943,13 +943,33 @@ window.onload = function() {
       "/api/v1/posts": {
         "post": {
           "operationId": "PostsController_create",
+          "summary": "Create a Post",
           "parameters": [],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreatePostDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file",
+                    "title",
+                    "content"
+                  ],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
@@ -960,7 +980,7 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/"
+                    "$ref": "#/components/schemas/PostEntity"
                   }
                 }
               }
@@ -975,6 +995,7 @@ window.onload = function() {
         },
         "get": {
           "operationId": "PostsController_findAll",
+          "summary": "Get posts",
           "parameters": [],
           "responses": {
             "200": {
@@ -984,7 +1005,7 @@ window.onload = function() {
                   "schema": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/"
+                      "$ref": "#/components/schemas/PostEntity"
                     }
                   }
                 }
@@ -1012,6 +1033,7 @@ window.onload = function() {
       "/api/v1/posts/{id}": {
         "get": {
           "operationId": "PostsController_findOne",
+          "summary": "Get post by id",
           "parameters": [
             {
               "name": "id",
@@ -1024,27 +1046,20 @@ window.onload = function() {
           ],
           "responses": {
             "200": {
-              "description": "get post by id",
+              "description": "",
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/"
+                    "$ref": "#/components/schemas/PostEntity"
                   }
                 }
               }
+            },
+            "400": {
+              "description": "Bad Request"
             },
             "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
+              "description": "Not Found"
             }
           },
           "tags": [
@@ -1053,6 +1068,7 @@ window.onload = function() {
         },
         "patch": {
           "operationId": "PostsController_update",
+          "summary": "Update post",
           "parameters": [
             {
               "name": "id",
@@ -1065,10 +1081,25 @@ window.onload = function() {
           ],
           "requestBody": {
             "required": true,
+            "description": "Upload a file",
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdatePostDto"
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [],
+                  "$ref": "#/components/schemas/"
                 }
               }
             }
@@ -1079,7 +1110,7 @@ window.onload = function() {
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/"
+                    "$ref": "#/components/schemas/PostEntity"
                   }
                 }
               }
@@ -1116,20 +1147,10 @@ window.onload = function() {
           ],
           "responses": {
             "200": {
-              "description": "delete post"
+              "description": "Deleted Successfully"
             },
             "404": {
-              "description": "not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NotFoundResponse"
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "internal server error"
+              "description": "Not Found"
             }
           },
           "tags": [
@@ -1374,20 +1395,24 @@ window.onload = function() {
             "libraries"
           ]
         },
-        "CreatePostDto": {
+        "PostEntity": {
           "type": "object",
           "properties": {
             "title": {
-              "type": "string"
+              "type": "string",
+              "description": "Title of the post"
             },
             "content": {
-              "type": "string"
+              "type": "string",
+              "description": "Content of the post"
             },
             "image_url": {
-              "type": "string"
+              "type": "string",
+              "description": "Url of the image"
             },
             "image_id": {
-              "type": "string"
+              "type": "string",
+              "description": "Cloudinary public id of the image"
             }
           },
           "required": [
@@ -1396,23 +1421,6 @@ window.onload = function() {
             "image_url",
             "image_id"
           ]
-        },
-        "UpdatePostDto": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            },
-            "content": {
-              "type": "string"
-            },
-            "image_url": {
-              "type": "string"
-            },
-            "image_id": {
-              "type": "string"
-            }
-          }
         }
       }
     }
