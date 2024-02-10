@@ -17,6 +17,11 @@ export class FunctionsController {
     return this.functionsService.findAll();
   }
 
+  @Get('stack')
+  findAllWithStack() {
+    return this.functionsService.findAllWithStack();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.functionsService.findOne(+id);

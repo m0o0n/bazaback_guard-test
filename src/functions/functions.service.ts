@@ -20,6 +20,10 @@ export class FunctionsService {
   }
 
   async findAll() {
+    return await this.functionRepository.find({});
+  }
+
+  async findAllWithStack(){
     const result = await this.functionRepository.find({
       relations: {
         function_id: {

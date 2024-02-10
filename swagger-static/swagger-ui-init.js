@@ -1230,6 +1230,17 @@ window.onload = function() {
           }
         }
       },
+      "/api/v1/functions/stack": {
+        "get": {
+          "operationId": "FunctionsController_findAllWithStack",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
       "/api/v1/functions/{id}": {
         "get": {
           "operationId": "FunctionsController_findOne",
