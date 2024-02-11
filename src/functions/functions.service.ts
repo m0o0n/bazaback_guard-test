@@ -35,7 +35,7 @@ export class FunctionsService {
       return {
         id,
         title,
-        stack: function_id.map(({stack_id}) => stack_id.title)
+        stack: function_id.map(({stack_id}) => ({id: stack_id.id, title:stack_id.title}))
       }
     })
     return formatResult
