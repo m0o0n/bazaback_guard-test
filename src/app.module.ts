@@ -17,6 +17,9 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
 import { PartnersModule } from './partners/partners.module';
 import { CountersModule } from './counters/counters.module';
 import { PostsModule } from './posts/posts.module';
+import { FunctionsModule } from './functions/functions.module';
+import { StackModule } from './stack/stack.module';
+import { FunctionStackModule } from './function-stack/function-stack.module';
 
 @Module({
   imports: [
@@ -60,6 +63,9 @@ import { PostsModule } from './posts/posts.module';
     PartnersModule,
     CountersModule,
     PostsModule,
+    FunctionsModule,
+    StackModule,
+    FunctionStackModule,
   ],
   controllers: [AppController],
   providers: [AppService],
