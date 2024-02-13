@@ -17,9 +17,9 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
 import { PartnersModule } from './partners/partners.module';
 import { CountersModule } from './counters/counters.module';
 import { PostsModule } from './posts/posts.module';
-import { FunctionsModule } from './functions/functions.module';
 import { StackModule } from './stack/stack.module';
-import { FunctionStackModule } from './function-stack/function-stack.module';
+import { SpecializationModule } from './specialization/specialization.module';
+import { SpecializationStackModule } from './specialization-stack/specialization-stack.module';
 
 @Module({
   imports: [
@@ -63,9 +63,9 @@ import { FunctionStackModule } from './function-stack/function-stack.module';
     PartnersModule,
     CountersModule,
     PostsModule,
-    FunctionsModule,
     StackModule,
-    FunctionStackModule,
+    SpecializationModule,
+    SpecializationStackModule,
   ],
   controllers: [AppController],
   providers: [AppService],

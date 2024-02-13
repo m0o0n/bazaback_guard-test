@@ -1200,113 +1200,6 @@ window.onload = function() {
           ]
         }
       },
-      "/api/v1/functions": {
-        "post": {
-          "operationId": "FunctionsController_create",
-          "parameters": [],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreateFunctionDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": ""
-            }
-          }
-        },
-        "get": {
-          "operationId": "FunctionsController_findAll",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        }
-      },
-      "/api/v1/functions/stack": {
-        "get": {
-          "operationId": "FunctionsController_findAllWithStack",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        }
-      },
-      "/api/v1/functions/{id}": {
-        "get": {
-          "operationId": "FunctionsController_findOne",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        },
-        "patch": {
-          "operationId": "FunctionsController_update",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UpdateFunctionDto"
-                }
-              }
-            }
-          },
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        },
-        "delete": {
-          "operationId": "FunctionsController_remove",
-          "parameters": [
-            {
-              "name": "id",
-              "required": true,
-              "in": "path",
-              "schema": {
-                "type": "string"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": ""
-            }
-          }
-        }
-      },
       "/api/v1/stack": {
         "post": {
           "operationId": "StackController_create",
@@ -1403,16 +1296,16 @@ window.onload = function() {
           }
         }
       },
-      "/api/v1/function-stack": {
+      "/api/v1/specialization": {
         "post": {
-          "operationId": "FunctionStackController_create",
+          "operationId": "SpecializationController_create",
           "parameters": [],
           "requestBody": {
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateFunctionStackDto"
+                  "$ref": "#/components/schemas/CreateSpecializationDto"
                 }
               }
             }
@@ -1424,7 +1317,7 @@ window.onload = function() {
           }
         },
         "get": {
-          "operationId": "FunctionStackController_findAll",
+          "operationId": "SpecializationController_findAll",
           "parameters": [],
           "responses": {
             "200": {
@@ -1433,9 +1326,20 @@ window.onload = function() {
           }
         }
       },
-      "/api/v1/function-stack/{id}": {
+      "/api/v1/specialization/stack": {
         "get": {
-          "operationId": "FunctionStackController_findOne",
+          "operationId": "SpecializationController_findAllWithStack",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/specialization/{id}": {
+        "get": {
+          "operationId": "SpecializationController_findOne",
           "parameters": [
             {
               "name": "id",
@@ -1453,7 +1357,7 @@ window.onload = function() {
           }
         },
         "patch": {
-          "operationId": "FunctionStackController_update",
+          "operationId": "SpecializationController_update",
           "parameters": [
             {
               "name": "id",
@@ -1469,7 +1373,7 @@ window.onload = function() {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateFunctionStackDto"
+                  "$ref": "#/components/schemas/UpdateSpecializationDto"
                 }
               }
             }
@@ -1481,7 +1385,103 @@ window.onload = function() {
           }
         },
         "delete": {
-          "operationId": "FunctionStackController_remove",
+          "operationId": "SpecializationController_remove",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/specialization-stack": {
+        "post": {
+          "operationId": "SpecializationStackController_create",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSpecializationStackDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          }
+        },
+        "get": {
+          "operationId": "SpecializationStackController_findAll",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/api/v1/specialization-stack/{id}": {
+        "get": {
+          "operationId": "SpecializationStackController_findOne",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        },
+        "patch": {
+          "operationId": "SpecializationStackController_update",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateSpecializationStackDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        },
+        "delete": {
+          "operationId": "SpecializationStackController_remove",
           "parameters": [
             {
               "name": "id",
@@ -1755,25 +1755,6 @@ window.onload = function() {
             "image_id"
           ]
         },
-        "CreateFunctionDto": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "title"
-          ]
-        },
-        "UpdateFunctionDto": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string"
-            }
-          }
-        },
         "CreateStackDto": {
           "type": "object",
           "properties": {
@@ -1793,6 +1774,25 @@ window.onload = function() {
             }
           }
         },
+        "CreateSpecializationDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title"
+          ]
+        },
+        "UpdateSpecializationDto": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            }
+          }
+        },
         "Stack": {
           "type": "object",
           "properties": {
@@ -1805,7 +1805,7 @@ window.onload = function() {
             "title"
           ]
         },
-        "Function": {
+        "Specialization": {
           "type": "object",
           "properties": {
             "title": {
@@ -1817,29 +1817,29 @@ window.onload = function() {
             "title"
           ]
         },
-        "CreateFunctionStackDto": {
+        "CreateSpecializationStackDto": {
           "type": "object",
           "properties": {
             "stack_id": {
               "$ref": "#/components/schemas/Stack"
             },
-            "function_id": {
-              "$ref": "#/components/schemas/Function"
+            "specialization_id": {
+              "$ref": "#/components/schemas/Specialization"
             }
           },
           "required": [
             "stack_id",
-            "function_id"
+            "specialization_id"
           ]
         },
-        "UpdateFunctionStackDto": {
+        "UpdateSpecializationStackDto": {
           "type": "object",
           "properties": {
             "stack_id": {
               "$ref": "#/components/schemas/Stack"
             },
-            "function_id": {
-              "$ref": "#/components/schemas/Function"
+            "specialization_id": {
+              "$ref": "#/components/schemas/Specialization"
             }
           }
         }
