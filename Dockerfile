@@ -1,6 +1,6 @@
-FROM node:18
+FROM node
 
-WORKDIR /src
+WORKDIR /src/bazaskill_backend
 
 COPY package*.json ./
 
