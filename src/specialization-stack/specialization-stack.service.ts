@@ -66,6 +66,6 @@ export class SpecializationStackService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} functionStack`;
+    return this.specializationStackRepository.delete(id);
   }
 }

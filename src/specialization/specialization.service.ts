@@ -27,7 +27,7 @@ export class SpecializationService {
     const result = await this.specializtionRepository.find({
       relations: {
         specialization_id: {
-          stack_id: true
+          stack_id: true,
         },
       },
     });
@@ -35,7 +35,7 @@ export class SpecializationService {
       return {
         id,
         title,
-        stack: specialization_id.map(({stack_id}) => ({id: stack_id.id, title:stack_id.title}))
+        stack: specialization_id.map(({stack_id, id}) => ({id: stack_id.id, specialization_stack_id: id, title:stack_id.title}))
       }
     })
     return formatResult
