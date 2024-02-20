@@ -19,6 +19,10 @@ export class User {
   @Column()
   password: string;
 
+  @ApiProperty({ description: 'User`s role' })
+  @Column()
+  role: string;
+
   @CreateDateColumn()
   createdAt: Date;
 }
