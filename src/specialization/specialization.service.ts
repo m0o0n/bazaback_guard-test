@@ -57,6 +57,7 @@ export class SpecializationService {
   remove(id: number) {
     const func = this.specializtionRepository.findOne({where: {id} })
     if(!func) return new NotFoundException('Function not found')
-    return this.specializtionRepository.delete(id);
+    this.specializtionRepository.delete(id);
+    return {success: true}
   }
 }
