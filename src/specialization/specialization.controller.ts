@@ -20,6 +20,7 @@ export class SpecializationController {
   @ApiBody({
     type: CreateSpecializationDto
   })
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
