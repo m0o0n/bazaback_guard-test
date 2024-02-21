@@ -1312,18 +1312,41 @@ window.onload = function() {
           },
           "responses": {
             "201": {
-              "description": ""
+              "description": "Create specialization",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Specialization"
+                  }
+                }
+              }
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         },
         "get": {
           "operationId": "SpecializationController_findAll",
           "parameters": [],
           "responses": {
             "200": {
-              "description": ""
+              "description": "Get specialization",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Specialization"
+                    }
+                  }
+                }
+              }
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         }
       },
       "/api/v1/specialization/stack": {
@@ -1332,9 +1355,35 @@ window.onload = function() {
           "parameters": [],
           "responses": {
             "200": {
-              "description": ""
+              "description": "Get specialization with stack",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ISpecializationWithStack"
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         }
       },
       "/api/v1/specialization/{id}": {
@@ -1352,9 +1401,32 @@ window.onload = function() {
           ],
           "responses": {
             "200": {
-              "description": ""
+              "description": "Get specialization",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Specialization"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         },
         "patch": {
           "operationId": "SpecializationController_update",
@@ -1379,10 +1451,33 @@ window.onload = function() {
             }
           },
           "responses": {
-            "200": {
-              "description": ""
+            "201": {
+              "description": "Update specialization",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Specialization"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         },
         "delete": {
           "operationId": "SpecializationController_remove",
@@ -1398,9 +1493,25 @@ window.onload = function() {
           ],
           "responses": {
             "200": {
-              "description": ""
+              "description": "delete specialization"
+            },
+            "404": {
+              "description": "not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResponse"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "internal server error"
             }
-          }
+          },
+          "tags": [
+            "Specializations"
+          ]
         }
       },
       "/api/v1/specialization-stack": {
@@ -1785,6 +1896,63 @@ window.onload = function() {
             "title"
           ]
         },
+        "Specialization": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "title": {
+              "type": "string",
+              "description": "Function which candidate execute on project such as PM or frontend etc"
+            }
+          },
+          "required": [
+            "id",
+            "title"
+          ]
+        },
+        "ISpecializationStack": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "specialization_stack_id": {
+              "type": "number"
+            },
+            "title": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "specialization_stack_id",
+            "title"
+          ]
+        },
+        "ISpecializationWithStack": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "title": {
+              "type": "number"
+            },
+            "stack": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ISpecializationStack"
+              }
+            }
+          },
+          "required": [
+            "id",
+            "title",
+            "stack"
+          ]
+        },
         "UpdateSpecializationDto": {
           "type": "object",
           "properties": {
@@ -1799,18 +1967,6 @@ window.onload = function() {
             "title": {
               "type": "string",
               "description": "title of stack technology such as HTML/CSS"
-            }
-          },
-          "required": [
-            "title"
-          ]
-        },
-        "Specialization": {
-          "type": "object",
-          "properties": {
-            "title": {
-              "type": "string",
-              "description": "Function which candidate execute on project such as PM or frontend etc"
             }
           },
           "required": [
