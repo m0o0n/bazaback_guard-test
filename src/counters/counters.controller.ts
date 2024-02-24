@@ -17,6 +17,7 @@ import { CountersService } from './counters.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
 import { UpdateTestimonialDto } from 'src/testimonials/dto/update-testimonial.dto';
+import { RoleGuard } from 'src/role-guard';
 
 @ApiTags('Counters')
 @Controller('counters')
@@ -36,6 +37,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
+  @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createCounterDto: CreateCounterDto) {
     return this.countersService.create(createCounterDto);
   }
@@ -92,7 +94,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   update(@Param('id') id: string, @Body() updateCounterDto: UpdateCounterDto) {
     return this.countersService.update(+id, updateCounterDto);
   }
@@ -109,7 +111,7 @@ export class CountersController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   remove(@Param('id') id: string) {
     return this.countersService.remove(+id);
   }

@@ -21,8 +21,9 @@ export class SpecializationController {
   @ApiBody({
     type: CreateSpecializationDto
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+
   @Post()
+  @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
   }
@@ -92,8 +93,8 @@ export class SpecializationController {
   @ApiBody({
     type: UpdateSpecializationDto
   })
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
+  @UseGuards(JwtAuthGuard, RoleGuard)
   update(@Param('id') id: string, @Body() updateSpecializationDto: UpdateSpecializationDto) {
     return this.specializationService.update(+id, updateSpecializationDto);
   }
@@ -108,8 +109,8 @@ export class SpecializationController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RoleGuard)
   remove(@Param('id') id: string) {
     return this.specializationService.remove(+id);
   }
