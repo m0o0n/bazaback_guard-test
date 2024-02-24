@@ -7,6 +7,7 @@ import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ISpecializationWithStack } from './types';
 import { NotFoundResponse } from '../types';
+import { RoleGuard } from 'src/role-guard';
 
 @ApiTags('Specializations')
 @Controller('specialization')
@@ -20,7 +21,7 @@ export class SpecializationController {
   @ApiBody({
     type: CreateSpecializationDto
   })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
@@ -107,7 +108,7 @@ export class SpecializationController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.specializationService.remove(+id);

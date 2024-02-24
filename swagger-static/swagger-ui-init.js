@@ -1650,6 +1650,9 @@ window.onload = function() {
             "email": {
               "type": "string"
             },
+            "role": {
+              "type": "string"
+            },
             "access_token": {
               "type": "string"
             }
@@ -1657,6 +1660,7 @@ window.onload = function() {
           "required": [
             "id",
             "email",
+            "role",
             "access_token"
           ]
         },

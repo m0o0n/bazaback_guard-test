@@ -6,6 +6,8 @@ export class IUser {
   @ApiProperty()
   email: string;
   @ApiProperty()
+  role: string;
+  @ApiProperty()
   access_token: string;
 }
 
