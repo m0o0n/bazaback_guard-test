@@ -102,7 +102,7 @@ export class SpecializationController {
     type: UpdateSpecializationDto,
   })
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   update(
     @Param('id') id: string,
     @Body() updateSpecializationDto: UpdateSpecializationDto,
@@ -121,7 +121,7 @@ export class SpecializationController {
     description: 'internal server error',
   })
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   remove(@Param('id') id: string) {
     return this.specializationService.remove(+id);
   }
