@@ -12,7 +12,6 @@ import { SpecializationStackService } from './specialization-stack.service';
 import { CreateSpecializationStackDto } from './dto/create-specialization-stack.dto';
 import { UpdateSpecializationStackDto } from './dto/update-specialization-stack.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/auth/role/role.guard';
 
 @Controller('specialization-stack')
 export class SpecializationStackController {
@@ -21,7 +20,7 @@ export class SpecializationStackController {
   ) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   create(@Body() createSpecializationStackDto: CreateSpecializationStackDto) {
     return this.specializationStackService.create(createSpecializationStackDto);
   }
@@ -37,7 +36,7 @@ export class SpecializationStackController {
   }
 
   @Patch(':id')
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateSpecializationStackDto: UpdateSpecializationStackDto,
@@ -49,7 +48,7 @@ export class SpecializationStackController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.specializationStackService.remove(+id);
   }
