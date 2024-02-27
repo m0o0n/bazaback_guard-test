@@ -16,6 +16,7 @@ import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ISpecializationWithStack } from './types';
 import { NotFoundResponse } from '../types';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Specializations')
 @Controller('specialization')
@@ -30,7 +31,7 @@ export class SpecializationController {
     type: CreateSpecializationDto,
   })
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
   }
