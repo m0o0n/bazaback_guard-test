@@ -16,7 +16,6 @@ import { Testimonial } from './entities/testimonial.entity';
 import { TestimonialsService } from './testimonials.service';
 import { CreateTestimonialDto } from './dto/create-testimonial.dto';
 import { UpdateTestimonialDto } from './dto/update-testimonial.dto';
-import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Testimonials')
 @Controller('testimonials')
@@ -36,7 +35,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   create(@Body() createTestimonialDto: CreateTestimonialDto) {
     return this.testimonialsService.create(createTestimonialDto);
   }
@@ -98,7 +97,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   update(
     @Param('id') id: string,
     @Body() updateTestimonialDto: UpdateTestimonialDto,
@@ -118,7 +117,7 @@ export class TestimonialsController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.testimonialsService.remove(+id);
   }
