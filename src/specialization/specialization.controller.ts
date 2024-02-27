@@ -31,7 +31,6 @@ export class SpecializationController {
     type: CreateSpecializationDto,
   })
   @Post()
-  @Roles(['admin'])
   @UseGuards(JwtAuthGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
