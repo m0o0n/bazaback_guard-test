@@ -22,7 +22,6 @@ import { NotFoundResponse, UploadImageResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Gallery')
 @Controller('gallery')
@@ -64,7 +63,7 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   create(@Body() createGalleryDto: CreateGalleryDto) {
     return this.galleryService.create(createGalleryDto);
   }
@@ -113,7 +112,7 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.galleryService.remove(+id);
   }
@@ -129,7 +128,7 @@ export class GalleryController {
     status: 500,
     description: 'internal server error',
   })
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
     @UploadedFile(
