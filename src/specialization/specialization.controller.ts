@@ -16,7 +16,6 @@ import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ISpecializationWithStack } from './types';
 import { NotFoundResponse } from '../types';
-import { Roles } from 'src/roles.decorator';
 
 @ApiTags('Specializations')
 @Controller('specialization')
