@@ -1,5 +1,4 @@
-import { RoleGuard } from './../auth/role/role.guard';
-
+// import { RoleGuard } from './../auth/role/role.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import {
@@ -18,6 +17,7 @@ import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ISpecializationWithStack } from './types';
 import { NotFoundResponse } from '../types';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Specializations')
 @Controller('specialization')
@@ -32,7 +32,7 @@ export class SpecializationController {
     type: CreateSpecializationDto,
   })
   @Post()
-  @UseGuards(JwtAuthGuard, RoleGuard)
+  @UseGuards(RoleGuard, JwtAuthGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
   }
