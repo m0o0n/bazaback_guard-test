@@ -1,4 +1,5 @@
-import { RoleGuard } from 'src/auth/role/role.guard';
+import { RoleGuard } from './../auth/role/role.guard';
+
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import {
