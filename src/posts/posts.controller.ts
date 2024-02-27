@@ -28,7 +28,7 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PostEntity } from './entities/post.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Posts')
 @Controller('posts')

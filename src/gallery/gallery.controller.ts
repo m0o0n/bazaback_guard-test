@@ -22,7 +22,7 @@ import { NotFoundResponse, UploadImageResponse } from '../types';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Gallery')
 @Controller('gallery')

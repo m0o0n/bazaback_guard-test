@@ -17,7 +17,7 @@ import { UpdatePartnerDto } from './dto/update-partner.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Partners')
 @Controller('partners')
@@ -43,7 +43,7 @@ export class PartnersController {
         name: { type: 'string' },
         partner_url: { type: 'string' },
       },
-      required: ['file', 'name', 'partner_url'],  
+      required: ['file', 'name', 'partner_url'],
     },
   })
   @UseInterceptors(FileInterceptor('file'))
@@ -86,7 +86,7 @@ export class PartnersController {
         name: { type: 'string' },
         partner_url: { type: 'string' },
       },
-      required: ['name', 'partner_url'],  
+      required: ['name', 'partner_url'],
     },
   })
   @UseInterceptors(FileInterceptor('file'))

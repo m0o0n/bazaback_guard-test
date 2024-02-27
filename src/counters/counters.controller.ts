@@ -17,7 +17,7 @@ import { CountersService } from './counters.service';
 import { CreateCounterDto } from './dto/create-counter.dto';
 import { UpdateCounterDto } from './dto/update-counter.dto';
 import { UpdateTestimonialDto } from 'src/testimonials/dto/update-testimonial.dto';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Counters')
 @Controller('counters')

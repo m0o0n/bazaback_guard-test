@@ -1,27 +1,35 @@
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { SpecializationService } from './specialization.service';
 import { CreateSpecializationDto } from './dto/create-specialization.dto';
 import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ISpecializationWithStack } from './types';
 import { NotFoundResponse } from '../types';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @ApiTags('Specializations')
 @Controller('specialization')
 export class SpecializationController {
-  constructor(private readonly specializationService: SpecializationService) { }
+  constructor(private readonly specializationService: SpecializationService) {}
   @ApiResponse({
     status: 201,
     description: 'Create specialization',
-    type: Specialization
+    type: Specialization,
   })
   @ApiBody({
-    type: CreateSpecializationDto
+    type: CreateSpecializationDto,
   })
-
   @Post()
   @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
@@ -31,7 +39,7 @@ export class SpecializationController {
   @ApiResponse({
     status: 200,
     description: 'Get specialization',
-    type: [Specialization]
+    type: [Specialization],
   })
   @Get()
   findAll() {
@@ -41,7 +49,7 @@ export class SpecializationController {
   @ApiResponse({
     status: 200,
     description: 'Get specialization with stack',
-    type: [ISpecializationWithStack]
+    type: [ISpecializationWithStack],
   })
   @ApiResponse({
     status: 404,
@@ -60,7 +68,7 @@ export class SpecializationController {
   @ApiResponse({
     status: 200,
     description: 'Get specialization',
-    type: Specialization
+    type: Specialization,
   })
   @ApiResponse({
     status: 404,
@@ -79,7 +87,7 @@ export class SpecializationController {
   @ApiResponse({
     status: 201,
     description: 'Update specialization',
-    type: Specialization
+    type: Specialization,
   })
   @ApiResponse({
     status: 404,
@@ -91,11 +99,14 @@ export class SpecializationController {
     description: 'internal server error',
   })
   @ApiBody({
-    type: UpdateSpecializationDto
+    type: UpdateSpecializationDto,
   })
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: string, @Body() updateSpecializationDto: UpdateSpecializationDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateSpecializationDto: UpdateSpecializationDto,
+  ) {
     return this.specializationService.update(+id, updateSpecializationDto);
   }
 
