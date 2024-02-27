@@ -1,3 +1,4 @@
+import { RoleGuard } from 'src/auth/role/role.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Specialization } from 'src/specialization/entities/specialization.entity';
 import {
@@ -30,7 +31,7 @@ export class SpecializationController {
     type: CreateSpecializationDto,
   })
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createSpecializationDto: CreateSpecializationDto) {
     return this.specializationService.create(createSpecializationDto);
   }
