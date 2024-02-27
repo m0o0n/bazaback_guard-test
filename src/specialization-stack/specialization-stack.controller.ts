@@ -1,14 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { SpecializationStackService } from './specialization-stack.service';
 import { CreateSpecializationStackDto } from './dto/create-specialization-stack.dto';
 import { UpdateSpecializationStackDto } from './dto/update-specialization-stack.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RoleGuard } from 'src/role-guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
 
 @Controller('specialization-stack')
 export class SpecializationStackController {
-  constructor(private readonly specializationStackService: SpecializationStackService) {}
-  
+  constructor(
+    private readonly specializationStackService: SpecializationStackService,
+  ) {}
+
   @Post()
   @UseGuards(JwtAuthGuard, RoleGuard)
   create(@Body() createSpecializationStackDto: CreateSpecializationStackDto) {
@@ -27,8 +38,14 @@ export class SpecializationStackController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: string, @Body() updateSpecializationStackDto: UpdateSpecializationStackDto) {
-    return this.specializationStackService.update(+id, updateSpecializationStackDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateSpecializationStackDto: UpdateSpecializationStackDto,
+  ) {
+    return this.specializationStackService.update(
+      +id,
+      updateSpecializationStackDto,
+    );
   }
 
   @Delete(':id')
